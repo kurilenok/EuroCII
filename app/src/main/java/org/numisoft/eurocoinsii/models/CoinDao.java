@@ -25,16 +25,16 @@ public class CoinDao {
         this.context = context;
     }
 
-    public List<Coin> getAllCoins(Theme theme1, Theme theme2) {
+    public List<Coin> getAllCoins(String country, int year) {
         StringBuilder query = new StringBuilder();
         query.append(SELECT);
         query.append("FROM catalog ");
         query.append("LEFT OUTER JOIN collection ON catalog.coinId = collection.coinId ");
-        query.append("WHERE (theme = '");
-        query.append(theme1.value);
-        query.append("' OR theme ='");
-        query.append(theme2.value);
-        query.append("') ORDER BY catalog.coinId DESC");
+        query.append("WHERE (country = '");
+        query.append(country);
+        query.append("' AND year =");
+        query.append(year);
+        query.append(") ORDER BY catalog.coinId DESC");
 
         return getSomeCoins(query.toString());
     }

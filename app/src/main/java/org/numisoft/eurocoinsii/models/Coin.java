@@ -11,7 +11,7 @@ public class Coin implements Serializable {
     private String name;
     private String fullname;
     private int year;
-    private String theme;
+    private String country;
     private String imageId;
     private String coinId;
     private String parentId;
@@ -50,12 +50,12 @@ public class Coin implements Serializable {
         this.year = year;
     }
 
-    public String getTheme() {
-        return theme;
+    public String getCountry() {
+        return country;
     }
 
-    public void setTheme(String theme) {
-        this.theme = theme;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public int getUnc() {

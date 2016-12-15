@@ -12,14 +12,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import org.numisoft.eurocoinsii.R;
-import org.numisoft.eurocoinsii.fragments.AllFragment;
 import org.numisoft.eurocoinsii.fragments.BasicFragment;
-import org.numisoft.eurocoinsii.fragments.NeedFragment;
-import org.numisoft.eurocoinsii.fragments.NotUncFragment;
-import org.numisoft.eurocoinsii.fragments.SwapFragment;
 import org.numisoft.eurocoinsii.models.Coin;
 import org.numisoft.eurocoinsii.models.CoinDao;
-import org.numisoft.eurocoinsii.models.Theme;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +26,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private Context context;
     private List<Coin> coins = new ArrayList<>();
-    private Theme theme1;
-    private Theme theme2;
+    private String country;
+    private int year;
 
     public interface OnDataClickListener {
         void onDataClick(Coin coin, int position);
@@ -40,24 +35,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
     private OnDataClickListener mOnDataClickListener;
 
-
     public MyAdapter(Context context, Fragment fragment) {
         this.context = context;
         this.mOnDataClickListener = (OnDataClickListener) fragment;
-        theme1 = ((BasicFragment) fragment).getTheme1() == null ?
-                Theme.PRESIDENTS_P : ((BasicFragment) fragment).getTheme1();
-        theme2 = ((BasicFragment) fragment).getTheme2() == null ?
-                Theme.PRESIDENTS_P : ((BasicFragment) fragment).getTheme2();
+        country = ((BasicFragment) fragment).getCountry() == null ?
+                "Germany" : ((BasicFragment) fragment).getCountry();
+        year = ((BasicFragment) fragment).getYear() == 0 ?
+                2000 : ((BasicFragment) fragment).getYear();
 
-        if (fragment instanceof AllFragment) {
-            coins = new CoinDao(context).getAllCoins(theme1, theme2);
-        } else if (fragment instanceof NeedFragment) {
-            coins = new CoinDao(context).getNeedCoins(theme1, theme2);
-        } else if (fragment instanceof SwapFragment) {
-            coins = new CoinDao(context).getSwapCoins(theme1, theme2);
-        } else if (fragment instanceof NotUncFragment) {
-            coins = new CoinDao(context).getNotUncCoins(theme1, theme2);
-        }
+
+        coins = new CoinDao(context).getAllCoins(country, year);
+
     }
 
     @Override

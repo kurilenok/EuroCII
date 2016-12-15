@@ -77,7 +77,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE catalog (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT, fullname TEXT, mintage TEXT, year INTEGER, " +
                 "imageId TEXT, coinId TEXT, parentId TEXT, mark TEXT, " +
-                "theme TEXT, description TEXT, remark TEXT)");
+                "country TEXT, description TEXT, remark TEXT)");
 
         for (Coin c : coins) {
             ContentValues cv = new ContentValues();
@@ -91,7 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
             cv.put("imageId", c.getImageId());
             cv.put("coinId", c.getCoinId());
             cv.put("parentId", c.getParentId());
-            cv.put("theme", c.getTheme());
+            cv.put("country", c.getCountry());
             db.insert("catalog", null, cv);
         }
     }

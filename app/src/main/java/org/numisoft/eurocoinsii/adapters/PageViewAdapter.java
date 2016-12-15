@@ -4,11 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import org.numisoft.eurocoinsii.fragments.AllFragment;
-import org.numisoft.eurocoinsii.fragments.NeedFragment;
-import org.numisoft.eurocoinsii.fragments.NotUncFragment;
-import org.numisoft.eurocoinsii.fragments.SwapFragment;
-import org.numisoft.eurocoinsii.models.Theme;
+import org.numisoft.eurocoinsii.fragments.BasicFragment;
 
 /**
  * Created by kukolka on 22.08.16.
@@ -16,35 +12,27 @@ import org.numisoft.eurocoinsii.models.Theme;
 public class PageViewAdapter extends FragmentStatePagerAdapter {
 
     int numberOfTabs;
-    Theme theme1;
-    Theme theme2;
+    String country;
+    int[] years;
 
-    public PageViewAdapter(FragmentManager fm, int numberOfTabs, Theme theme1, Theme theme2) {
+
+    public PageViewAdapter(FragmentManager fm, String country, int[] years) {
         super(fm);
-        this.numberOfTabs = numberOfTabs;
-        this.theme1 = theme1;
-        this.theme2 = theme2;
+        numberOfTabs = years.length;
+        this.country = country;
+        this.years = years;
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position) {
-            case 0:
-                return new AllFragment(theme1, theme2);
-            case 1:
-                return new NeedFragment(theme1, theme2);
-            case 2:
-                return new SwapFragment(theme1, theme2);
-            case 3:
-                return new NotUncFragment(theme1, theme2);
-            default:
-                return new AllFragment(theme1, theme2);
-        }
+       return new BasicFragment(country, years[position]);
     }
 
     @Override
     public int getCount() {
         return numberOfTabs;
     }
+
+
 
 }

@@ -1,6 +1,5 @@
 package org.numisoft.eurocoinsii.activities;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,7 +15,6 @@ import android.view.MenuItem;
 
 import org.numisoft.eurocoinsii.R;
 import org.numisoft.eurocoinsii.adapters.PageViewAdapter;
-import org.numisoft.eurocoinsii.models.Theme;
 import org.numisoft.eurocoinsii.utils.Constants;
 
 public class MainActivity extends AppCompatActivity
@@ -29,6 +27,9 @@ public class MainActivity extends AppCompatActivity
     ViewPager viewPager;
     SharedPreferences preferences;
     private Menu navigationViewMenu;
+
+    int[] finland = new int[]{2005, 2004, 2003, 2002, 2001, 2000, 1999};
+    int[] estonia = new int[]{2011, 2010, 2009};
 
 //    @Override
 //    protected void onRestoreInstanceState(Bundle savedInstanceState) {
@@ -47,21 +48,19 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.the_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("America The Beautiful");
+        getSupportActionBar().setTitle("Finland");
 
 // Tabs
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
-        tabLayout.addTab(tabLayout.newTab().setText("ALL"));
-//        tabLayout.addTab(tabLayout.newTab().setText("HAVE"));
-        tabLayout.addTab(tabLayout.newTab().setText("NEED"));
-        tabLayout.addTab(tabLayout.newTab().setText("SWAP"));
-        tabLayout.addTab(tabLayout.newTab().setText("UNC-"));
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+
+        resetTabs(finland);
+
 
 // Pager
         viewPager = (ViewPager) findViewById(R.id.pager);
         pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                tabLayout.getTabCount(), Theme.PARKS_P, Theme.PARKS_P);
+                "Finland", finland);
         viewPager.setAdapter(pagerAdapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -71,9 +70,11 @@ public class MainActivity extends AppCompatActivity
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
+
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
             }
+
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
             }
@@ -88,85 +89,21 @@ public class MainActivity extends AppCompatActivity
 // Navigation
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 //        navigationView.addHeaderView(View.inflate(this, R.layout.nav_header, null));
-//        navigationView.setItemIconTintList(null);
+        navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
 
 // Navigation menu transformation
-        navigationViewMenu = navigationView.getMenu();
-        int viewMode = preferences.getInt(VIEW_MODE, 1);
-        switch (viewMode) {
-            case 0:
-                hideMenuItemsMode0(navigationViewMenu);
-                break;
-            case 1:
-                hideMenuItemsMode1(navigationViewMenu);
-                break;
-            case 2:
-                hideMenuItemsMode2(navigationViewMenu);
-                break;
+
+    }
+
+    private void resetTabs(int[] country) {
+        tabLayout.removeAllTabs();
+        for (int i = 0; i < country.length; i++) {
+            tabLayout.addTab(
+                    tabLayout.newTab().setText(Integer.toString(country[i])));
         }
     }
 
-    private void hideMenuItemsMode0(Menu navigationViewMenu) {
-        navigationViewMenu.findItem(R.id.nav_menu_states_p).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_states_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_states_p_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_p).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_p_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_p).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_p_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_p).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_p_d).setVisible(false);
-
-        navigationViewMenu.findItem(R.id.nav_menu_states).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_parks).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents).setVisible(true);
-    }
-
-    private void hideMenuItemsMode1(Menu navigationViewMenu) {
-        navigationViewMenu.findItem(R.id.nav_menu_states).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_states_p_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_parks).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_p_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_p_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_p_d).setVisible(false);
-
-        navigationViewMenu.findItem(R.id.nav_menu_states_p).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_states_d).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_p).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_d).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_p).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_d).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_p).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_d).setVisible(true);
-
-    }
-
-    private void hideMenuItemsMode2(Menu navigationViewMenu) {
-        navigationViewMenu.findItem(R.id.nav_menu_states).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_states_p).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_states_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_parks).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_p).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_p).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_d).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_p).setVisible(false);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_d).setVisible(false);
-
-        navigationViewMenu.findItem(R.id.nav_menu_states_p_d).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_parks_p_d).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_sacagawea_p_d).setVisible(true);
-        navigationViewMenu.findItem(R.id.nav_menu_presidents_p_d).setVisible(true);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -179,28 +116,6 @@ public class MainActivity extends AppCompatActivity
         if (drawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-        if (item.getItemId() == R.id.menu_1) {
-            startActivity(new Intent(this, SettingsActivity.class));
-        }
-
-        if (item.getItemId() == R.id.aux_menu_one_mint) {
-            preferences.edit().putInt(VIEW_MODE, 1).apply();
-            hideMenuItemsMode1(navigationViewMenu);
-            item.setChecked(true);
-            resetDisplay();
-        }
-        if (item.getItemId() == R.id.aux_menu_two_mints) {
-            preferences.edit().putInt(VIEW_MODE, 2).apply();
-            hideMenuItemsMode2(navigationViewMenu);
-            item.setChecked(true);
-            resetDisplay();
-        }
-        if (item.getItemId() == R.id.aux_menu_no_mints) {
-            preferences.edit().putInt(VIEW_MODE, 0).apply();
-            hideMenuItemsMode0(navigationViewMenu);
-            item.setChecked(true);
-            resetDisplay();
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -208,104 +123,21 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_menu_states:
+            case R.id.nav_menu_estonia:
+                resetTabs(estonia);
                 pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.STATES, Theme.STATES);
+                        "Estonia", estonia);
                 viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.STATES.getValue());
+                getSupportActionBar().setTitle("Estonia");
                 break;
-            case R.id.nav_menu_states_p:
+            case R.id.nav_menu_finland:
+                resetTabs(finland);
                 pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.STATES_P, Theme.STATES_P);
+                        "Finland", finland);
                 viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.STATES_P.getValue());
-                break;
-            case R.id.nav_menu_states_d:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.STATES_D, Theme.STATES_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.STATES_D.getValue());
-                break;
-            case R.id.nav_menu_states_p_d:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.STATES_P, Theme.STATES_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.STATES.getValue());
+                getSupportActionBar().setTitle("Finland");
                 break;
 
-            case R.id.nav_menu_parks:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PARKS, Theme.PARKS);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PARKS.getValue());
-                break;
-            case R.id.nav_menu_parks_p:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PARKS_P, Theme.PARKS_P);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PARKS_P.getValue());
-                break;
-            case R.id.nav_menu_parks_d:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PARKS_D, Theme.PARKS_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PARKS_D.getValue());
-                break;
-            case R.id.nav_menu_parks_p_d:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PARKS_P, Theme.PARKS_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PARKS.getValue());
-                break;
-            case R.id.nav_menu_presidents:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PRESIDENTS, Theme.PRESIDENTS);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PRESIDENTS.getValue());
-                break;
-            case R.id.nav_menu_presidents_p:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PRESIDENTS_P, Theme.PRESIDENTS_P);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PRESIDENTS_P.getValue());
-                break;
-            case R.id.nav_menu_presidents_d:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PRESIDENTS_D, Theme.PRESIDENTS_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PRESIDENTS_D.getValue());
-                break;
-            case R.id.nav_menu_presidents_p_d:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PRESIDENTS_P, Theme.PRESIDENTS_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PRESIDENTS.getValue());
-                break;
-
-            case R.id.nav_menu_sacagawea:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.SACAGAWEA, Theme.SACAGAWEA);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.SACAGAWEA.getValue());
-                break;
-            case R.id.nav_menu_sacagawea_p:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.SACAGAWEA_P, Theme.SACAGAWEA_P);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.SACAGAWEA_P.getValue());
-                break;
-            case R.id.nav_menu_sacagawea_d:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.SACAGAWEA_D, Theme.SACAGAWEA_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.SACAGAWEA_D.getValue());
-                break;
-            case R.id.nav_menu_sacagawea_p_d:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.SACAGAWEA_P, Theme.SACAGAWEA_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.SACAGAWEA.getValue());
-                break;
         }
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START);
@@ -317,15 +149,12 @@ public class MainActivity extends AppCompatActivity
         int viewMode = preferences.getInt(VIEW_MODE, 1);
         switch (viewMode) {
             case 0:
-                hideMenuItemsMode0(navigationViewMenu);
                 menu.getItem(3).setChecked(true);
                 break;
             case 1:
-                hideMenuItemsMode1(navigationViewMenu);
                 menu.getItem(1).setChecked(true);
                 break;
             case 2:
-                hideMenuItemsMode2(navigationViewMenu);
                 menu.getItem(2).setChecked(true);
                 break;
         }
@@ -335,30 +164,30 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        resetDisplay();
+//        resetDisplay();
     }
 
-    private void resetDisplay() {
-        int viewMode = preferences.getInt(VIEW_MODE, 1);
-        switch (viewMode) {
-            case 0:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PARKS, Theme.PARKS);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PARKS.getValue());
-                break;
-            case 1:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PARKS_P, Theme.PARKS_P);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PARKS_P.getValue());
-                break;
-            case 2:
-                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
-                        tabLayout.getTabCount(), Theme.PARKS_P, Theme.PARKS_D);
-                viewPager.setAdapter(pagerAdapter);
-                getSupportActionBar().setTitle(Theme.PARKS.getValue());
-                break;
-        }
-    }
+//    private void resetDisplay() {
+//        int viewMode = preferences.getInt(VIEW_MODE, 1);
+//        switch (viewMode) {
+//            case 0:
+//                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
+//                        tabLayout.getTabCount(), Theme.PARKS, Theme.PARKS);
+//                viewPager.setAdapter(pagerAdapter);
+//                getSupportActionBar().setTitle(Theme.PARKS.getValue());
+//                break;
+//            case 1:
+//                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
+//                        tabLayout.getTabCount(), Theme.PARKS_P, Theme.PARKS_P);
+//                viewPager.setAdapter(pagerAdapter);
+//                getSupportActionBar().setTitle(Theme.PARKS_P.getValue());
+//                break;
+//            case 2:
+//                pagerAdapter = new PageViewAdapter(getSupportFragmentManager(),
+//                        tabLayout.getTabCount(), Theme.PARKS_P, Theme.PARKS_D);
+//                viewPager.setAdapter(pagerAdapter);
+//                getSupportActionBar().setTitle(Theme.PARKS.getValue());
+//                break;
+//        }
+//    }
 }

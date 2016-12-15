@@ -31,7 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/primary"
-                app:tabIndicatorColor="@color/accent">
+                app:tabIndicatorColor="@color/accent"
+                app:tabMaxWidth="60dp"
+                app:tabIndicatorHeight="10dp">
 
             </android.support.design.widget.TabLayout>
 

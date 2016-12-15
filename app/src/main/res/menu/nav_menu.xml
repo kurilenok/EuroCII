@@ -1,77 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Quarters">
+    <item android:title="Countries">
         <menu>
             <item
                 android:id="@+id/nav_menu_states"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Statehood Quarters" />
+                android:icon="@drawable/de"
+                android:title="Germany" />
             <item
                 android:id="@+id/nav_menu_states_p"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Statehood Quarters (P)" />
+                android:icon="@drawable/fr"
+                android:title="France" />
             <item
                 android:id="@+id/nav_menu_states_d"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Statehood Quarters (D)" />
+                android:icon="@drawable/it"
+                android:title="Italy" />
             <item
                 android:id="@+id/nav_menu_states_p_d"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Statehood Quarters" />
+                android:icon="@drawable/es"
+                android:title="Spain" />
             <item
                 android:id="@+id/nav_menu_parks"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="America the Beautiful" />
+                android:icon="@drawable/nl"
+                android:title="Netherlands" />
             <item
                 android:id="@+id/nav_menu_parks_p"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="America the Beautiful (P)" />
+                android:icon="@drawable/be"
+                android:title="Belgium" />
             <item
                 android:id="@+id/nav_menu_parks_d"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="America the Beautiful (D)" />
+                android:icon="@drawable/at"
+                android:title="Austria" />
             <item
-                android:id="@+id/nav_menu_parks_p_d"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="America the Beautiful" />
-        </menu>
-    </item>
+                android:id="@+id/nav_menu_finland"
+                android:icon="@drawable/fi"
+                android:title="Finland" />
 
-    <item android:title="Dollars">
-        <menu>
             <item
                 android:id="@+id/nav_menu_sacagawea"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Native American Dollars" />
+                android:icon="@drawable/pt"
+                android:title="Portugal" />
             <item
                 android:id="@+id/nav_menu_sacagawea_p"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Native American Dollars (P)" />
+                android:icon="@drawable/gr"
+                android:title="Greece" />
             <item
                 android:id="@+id/nav_menu_sacagawea_d"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Native American Dollars (D)" />
+                android:icon="@drawable/si"
+                android:title="Slovenia" />
             <item
                 android:id="@+id/nav_menu_sacagawea_p_d"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Native American Dollars" />
+                android:icon="@drawable/lv"
+                android:title="Latvia" />
             <item
-                android:id="@+id/nav_menu_presidents"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Presidential Dollars" />
+                android:id="@+id/nav_menu_estonia"
+                android:icon="@drawable/ee"
+                android:title="Estonia" />
             <item
                 android:id="@+id/nav_menu_presidents_p"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Presidential Dollars (P)" />
+                android:icon="@drawable/cy"
+                android:title="Cyprus" />
             <item
                 android:id="@+id/nav_menu_presidents_d"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Presidential Dollars (D)" />
+                android:icon="@drawable/mt"
+                android:title="Malta" />
             <item
                 android:id="@+id/nav_menu_presidents_p_d"
-                android:icon="@drawable/ic_label_black_24dp"
-                android:title="Presidential Dollars" />
+                android:icon="@drawable/va"
+                android:title="Vatican City" />
         </menu>
     </item>
 

@@ -25,8 +25,8 @@ import org.numisoft.eurocoinsii.utils.UpdateHelper;
 @SuppressLint("ValidFragment")
 public class BasicFragment extends Fragment implements MyAdapter.OnDataClickListener {
 
-    Theme theme1;
-    Theme theme2;
+    String country;
+    int year;
     View view;
     RecyclerView rvMain;
     MyAdapter myAdapter;
@@ -36,9 +36,9 @@ public class BasicFragment extends Fragment implements MyAdapter.OnDataClickList
     public BasicFragment() {
     }
 
-    public BasicFragment(Theme theme1, Theme theme2) {
-        this.theme1 = theme1;
-        this.theme2 = theme2;
+    public BasicFragment(String country, int year) {
+        this.country = country;
+        this.year = year;
     }
 
     @Nullable
@@ -104,19 +104,19 @@ public class BasicFragment extends Fragment implements MyAdapter.OnDataClickList
         rvMain.setLayoutManager(layoutManager);
     }
 
-    public Theme getTheme1() {
-        return theme1;
+    public String getCountry() {
+        return country;
     }
 
-    public void setTheme1(Theme theme1) {
-        this.theme1 = theme1;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
-    public Theme getTheme2() {
-        return theme2;
+    public int getYear() {
+        return year;
     }
 
-    public void setTheme2(Theme theme2) {
-        this.theme2 = theme2;
+    public void setYear(int year) {
+        this.year = year;
     }
 }
