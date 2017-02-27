@@ -6,10 +6,7 @@
 .DS_Store
 /build
 /captures
-*.png
-*.jpg
-*.gif
-*.jpeg
+
 # built application files
 *.apk
 *.ap_
